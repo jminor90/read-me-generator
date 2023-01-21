@@ -6,33 +6,74 @@ const generateMarkdown = require('./utils/generateMarkdown')
 // TODO: Create an array of questions for user input
 const questions = [
     {
-        message: 'What is your name?',
+        message: 'Title of project?',
+        type: 'input',
+        name: 'userTitle'
+    },
+
+    {
+        message: 'Enter a short Description of project',
+        type: 'input',
+        name: 'userDescription'
+    },
+
+    {
+        message: 'Choose a license',
+        type: 'list',
+        choices: [
+            'MIT',
+            'GNU GPLv3',
+            'Apache License 2.0',
+            'None'
+        ],
+        name: 'userLicense'
+    },
+
+    {
+        message: 'Enter Installation instructions',
+        type: 'input',
+        name: 'userInstallation',
+    },
+
+    {
+        message: 'Enter URL to deployed application',
+        type: 'input',
+        name: 'userURL',
+    },
+
+    {
+        message: 'Enter Usage Instructions',
+        type: 'input',
+        name: 'userUsage',
+    },
+
+    {
+        message: 'Enter relevant tests',
+        type: 'input',
+        name: 'userTests'
+    },
+
+    {
+        message: 'Enter Contributors',
+        type: 'input',
+        name: 'userCredits'
+    },
+
+    {
+        message: 'What is your Github Username?',
         type: 'input',
         name: 'userName'
     },
+
     {
-        message:'Star Wars or Star Trek?',
-        type: 'checkbox',
-        choices: [
-            'Star Wars',
-            'Star Trek',
-        ],
-        name: 'userChoice',
+        message: 'What is your email address?',
+        type: 'input',
+        name: 'userEmail'
     },
-    {
-        message: 'Preferred means of contact?',
-        type: 'list',
-        choices: [
-            'Email',
-            'Phone',
-            'SMS'
-        ],
-        name: 'userContact',
-    }
+
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+
 
 // TODO: Create a function to initialize app
 function init() {

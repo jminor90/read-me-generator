@@ -12,15 +12,64 @@ function renderLicenseLink(license) {}
 // If there is no license, return an empty string
 function renderLicenseSection(license) {}
 
+// TODO: Create a function to write README file
+function writeToFile(data) {
+  fs.writeFile(`${data.userTitle}-README.md`, 
+`
+# ${data.userTitle}
+
+![${data.userTitle}](https://img.shields.io/github/license/${data.userName}/${data.userTitle})
+
+## Description
+${data.userDescription}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tests](#tests)
+- [Credits](#credits)
+- [License](#license)
+
+## Installation
+${data.userInstallation}
+
+## Usage
+Link to Application: ${data.userURL}
+
+${data.userUsage}
+
+## Tests
+${data.userTests}
+
+## Credits
+${data.userCredits}
+
+## License
+
+${data.userLicense}
+
+
+## Questions?
+
+- Github: https://github.com/${data.userName}
+
+- Email: ${data.userEmail}
+
+
+`, //https://img.shields.io/github/license/jminor90/the-translator
+(err) => {
+    err ? console.error(err) : console.info('Success Captain!')
+  })
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
   console.log("This is the generate Markdown Func")
   console.log(answers)
   console.log("This is the generate Markdown Func")
 
-  fs.writeFile('log.txt', `${answers.userName}; ${answers.userChoice}; ${answers.userContact}`, (err) => {
-    err ? console.error(err) : console.info('Success Captain!')
-  })
+  writeToFile(answers)
 
   /*
   return `# ${data.title}

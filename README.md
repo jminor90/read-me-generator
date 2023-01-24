@@ -26,6 +26,8 @@ Link to Application: https://github.com/jminor90/read-me-generator
 
 Install needed packages with npm, and use NodeJS to open index.JS to begin. Follow the prompts, and a README file will be generated once all questions have been answered.
 
+[Walkthrough Video](https://drive.google.com/file/d/1JJAezhpUsg5ocLSstzGU934vyw9BnZyg/view)
+
 ## Tests
 none
 

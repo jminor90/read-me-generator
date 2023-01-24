@@ -1,60 +1,60 @@
-// TODO: Include packages needed for this application
-const inquirer = require('inquirer');
+const inquirer = require ('inquirer');
+const fs = require('fs');
+const generateMarkdown = require ('./utils/generateMarkdown')
 
-const generateMarkdown = require('./utils/generateMarkdown')
 
-// TODO: Create an array of questions for user input
 const questions = [
     {
-        message: 'Title of project?',
+        message: 'Enter the title of project?\n(Titles with multiple words should be separated-like-this)',
         type: 'input',
         name: 'userTitle'
     },
 
     {
-        message: 'Enter a short Description of project',
+        message: 'Enter a short description of project.',
         type: 'input',
         name: 'userDescription'
     },
 
     {
-        message: 'Choose a license',
+        message: 'Choose a license:',
         type: 'list',
         choices: [
             'MIT',
             'GNU GPLv3',
-            'Apache License 2.0',
+            'Apache 2.0',
+            'Mozilla 2.0',
             'None'
         ],
         name: 'userLicense'
     },
 
     {
-        message: 'Enter Installation instructions',
+        message: 'Enter any required Installation Packages.',
         type: 'input',
         name: 'userInstallation',
     },
 
     {
-        message: 'Enter URL to deployed application',
-        type: 'input',
-        name: 'userURL',
-    },
-
-    {
-        message: 'Enter Usage Instructions',
+        message: 'Enter Usage Instructions.',
         type: 'input',
         name: 'userUsage',
     },
 
     {
-        message: 'Enter relevant tests',
+        message: 'Enter URL to deployed application.\n (https:// not required)',
+        type: 'input',
+        name: 'userURL',
+    },
+
+    {
+        message: 'Enter relevant tests:',
         type: 'input',
         name: 'userTests'
     },
 
     {
-        message: 'Enter Contributors',
+        message: 'Enter Contributors:',
         type: 'input',
         name: 'userCredits'
     },
@@ -74,17 +74,19 @@ const questions = [
 ];
 
 
+function writeToFile(fileName, data) {
+    const contents = generateMarkdown.generateMarkdown(data);
 
-// TODO: Create a function to initialize app
-function init() {
-    inquirer.prompt(questions)
-    .then ((answers) => {
-
-        generateMarkdown.generateMarkdown(answers);
-    })
-
+fs.writeFileSync(fileName, contents, console.log('File Written Successfully!'))
 }
 
-// Function call to initialize app
-init();
 
+function init() {
+    inquirer
+        .prompt(questions)
+        .then(answers => {writeToFile(`${answers.userTitle}-README.md`, answers)}) 
+        .catch(error => {console.error(`UH-OH: ${error}`)
+        })
+}
+
+init();

@@ -1,24 +1,54 @@
-const fs = require('fs');
+function renderLicenseBadge(data) {
+	let licenseBadge = ``;
+	let dataBadge = data.userLicense
+	
+  if (dataBadge === `MIT`) {
+    licenseBadge = `https://img.shields.io/badge/License-MIT-yellow.svg`
+    return licenseBadge
+  } else if (dataBadge === `GNU GPLv3`) {
+    licenseBadge = `https://img.shields.io/badge/License-GPLv3-blue.svg`
+    return licenseBadge
+  } else if (dataBadge === `Apache 2.0`) {
+    licenseBadge = `https://img.shields.io/badge/License-Apache_2.0-blue.svg`
+    return licenseBadge
+  } else if (dataBadge === `Mozilla 2.0`) {
+    licenseBadge = `https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg`
+    return licenseBadge
+  } else {
+    licenseBadge = `https://img.shields.io/badge/license-Unlicense-blue.svg`
+  }
+}
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+function renderLicenseLink(data) {
+  let licenseLink = ``;
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+  let dataLicense = data.userLicense
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+  if (dataLicense === `MIT`) {
+    licenseLink = `https://opensource.org/licenses/MIT`
+    return licenseLink;
+  } else if (dataLicense === `GNU GPLv3`) {
+    licenseLink = `https://www.gnu.org/licenses/gpl-3.0`
+    return licenseLink;
+  } else if (dataLicense === `Apache 2.0`) {
+    licenseLink = `https://opensource.org/licenses/Apache-2.0`
+    return licenseLink;
+  } else if (dataLicense === 'Mozilla 2.0') { 
+    licenseLink = `https://opensource.org/licenses/MPL-2.0`
+    return licenseLink
+  } else {
+    licenseLink = `https://unlicense.org/`
+    return licenseLink
+  }
+}
 
-// TODO: Create a function to write README file
-function writeToFile(data) {
-  fs.writeFile(`${data.userTitle}-README.md`, 
-`
+function generateMarkdown(data) {
+  return `
 # ${data.userTitle}
 
-![${data.userTitle}](https://img.shields.io/github/license/${data.userName}/${data.userTitle})
+[![License: ${data.userLicense}](${renderLicenseBadge(data)})](${renderLicenseLink(data)})
+
+
 
 ## Description
 ${data.userDescription}
@@ -30,12 +60,15 @@ ${data.userDescription}
 - [Tests](#tests)
 - [Credits](#credits)
 - [License](#license)
+- [Questions](#questions)
 
 ## Installation
+You may need to install the following packages...
+
 ${data.userInstallation}
 
 ## Usage
-Link to Application: ${data.userURL}
+Link to Application: https://${data.userURL}
 
 ${data.userUsage}
 
@@ -45,9 +78,6 @@ ${data.userTests}
 ## Credits
 ${data.userCredits}
 
-## License
-
-${data.userLicense}
 
 
 ## Questions?
@@ -56,35 +86,9 @@ ${data.userLicense}
 
 - Email: ${data.userEmail}
 
-
-`, //https://img.shields.io/github/license/jminor90/the-translator
-(err) => {
-    err ? console.error(err) : console.info('Success Captain!')
-  })
-}
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(answers) {
-  console.log("This is the generate Markdown Func")
-  console.log(answers)
-  console.log("This is the generate Markdown Func")
-
-  writeToFile(answers)
-
-  /*
-  return `# ${data.title}
-
 `;
-*/
-}
-
-
-function testFunction (answers) {
-  console.log("This is the Test Function")
-  console.log(answers)
 }
 
 module.exports = {
   generateMarkdown,
-  testFunction,
 };
